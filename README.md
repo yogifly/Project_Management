@@ -30,3 +30,11 @@ A **responsive and efficient project management system** built using modern web 
    ```bash
    git clone https://github.com/yogifly/Project_Management.git
    cd Project_Management
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+
+3. **Run the Development Server**
+   ```bash
+   npm run dev
