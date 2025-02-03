@@ -1,10 +1,10 @@
 import React from 'react';
 import Sidebar from './Sidebar';
 import SearchBar from './SearchBar';
-import ProjectCard from './ProjectCard';
-import CalendarComponent from './Calendar'; // Import Calendar component
 import Tasks from './Tasks'; // Import the Tasks component
 import { FaCheckCircle, FaHourglassStart, FaProjectDiagram } from 'react-icons/fa';
+import BasicDateCalendar from './Calendar';
+import ProjectTabs from './ProjectTabs';
 
 // Sample task data
 const tasks = [
@@ -14,10 +14,132 @@ const tasks = [
 ];
 
 const projects = [
-  { startDate: 'July 2, 2025', endDate: 'Sep 28, 2025', name: 'Web Designing', category: 'Prototyping', progress: 90, daysLeft: 2, teamMembersCount: 5 },
-  { startDate: 'July 5, 2025', endDate: 'Sep 28, 2025', name: 'Mobile App', category: 'Shopping', progress: 30, daysLeft: 21, teamMembersCount: 4 },
-  { startDate: 'July 10, 2025', endDate: 'Sep 28, 2025', name: 'Dashboard', category: 'Medical', progress: 50, daysLeft: 14, teamMembersCount: 3 },
-  { startDate: 'July 15, 2025', endDate: 'Sep 28, 2025', name: 'Web Designing', category: 'Wireframing', progress: 20, daysLeft: 21, teamMembersCount: 2 },
+  {
+    name: 'Web Designing',
+    category: 'Prototyping',
+    description: 'A project focused on creating an interactive and responsive web prototype for a client website.',
+    startDate: 'July 2, 2025',
+    endDate: 'Sep 28, 2025',
+    progress: 90,
+    daysLeft: 2,
+    teamMembersCount: 5,
+    teamDetails: [
+      { name: 'Alice', role: 'Designer' },
+      { name: 'Bob', role: 'Frontend Developer' },
+      { name: 'Charlie', role: 'Backend Developer' },
+      { name: 'Diana', role: 'Tester' },
+      { name: 'Eve', role: 'Project Manager' },
+    ],
+    tasks: [
+      {
+        name: 'Homepage Design',
+        description: 'Create an intuitive and user-friendly homepage layout.',
+        startDate: 'July 3, 2025',
+        endDate: 'July 10, 2025',
+        members: ['Alice', 'Bob'],
+      },
+      {
+        name: 'API Integration',
+        description: 'Integrate backend APIs with the frontend components.',
+        startDate: 'July 15, 2025',
+        endDate: 'July 25, 2025',
+        members: ['Charlie', 'Bob'],
+      },
+    ],
+  },
+  {
+    name: 'Mobile App',
+    category: 'Shopping',
+    description: 'Develop a mobile application for an online shopping platform.',
+    startDate: 'July 5, 2025',
+    endDate: 'Sep 28, 2025',
+    progress: 30,
+    daysLeft: 21,
+    teamMembersCount: 4,
+    teamDetails: [
+      { name: 'John', role: 'App Developer' },
+      { name: 'Sarah', role: 'UI/UX Designer' },
+      { name: 'Mike', role: 'QA Specialist' },
+      { name: 'Emma', role: 'Product Owner' },
+    ],
+    tasks: [
+      {
+        name: 'Wireframing',
+        description: 'Create wireframes for the shopping cart and payment screens.',
+        startDate: 'July 6, 2025',
+        endDate: 'July 10, 2025',
+        members: ['Sarah'],
+      },
+      {
+        name: 'Feature Development',
+        description: 'Implement user authentication and product search functionality.',
+        startDate: 'July 15, 2025',
+        endDate: 'July 25, 2025',
+        members: ['John', 'Emma'],
+      },
+    ],
+  },
+  {
+    name: 'Dashboard',
+    category: 'Medical',
+    description: 'Develop a medical data dashboard for healthcare providers.',
+    startDate: 'July 10, 2025',
+    endDate: 'Sep 28, 2025',
+    progress: 50,
+    daysLeft: 14,
+    teamMembersCount: 3,
+    teamDetails: [
+      { name: 'Sophia', role: 'Data Analyst' },
+      { name: 'Liam', role: 'Full Stack Developer' },
+      { name: 'Olivia', role: 'Project Manager' },
+    ],
+    tasks: [
+      {
+        name: 'Data Analysis',
+        description: 'Analyze and preprocess patient data for visualization.',
+        startDate: 'July 11, 2025',
+        endDate: 'July 18, 2025',
+        members: ['Sophia'],
+      },
+      {
+        name: 'Frontend Development',
+        description: 'Create charts and graphs for the dashboard UI.',
+        startDate: 'July 20, 2025',
+        endDate: 'July 30, 2025',
+        members: ['Liam'],
+      },
+    ],
+  },
+  {
+    name: 'Web Designing',
+    category: 'Wireframing',
+    description: 'Design wireframes for a corporate client’s website.',
+    startDate: 'July 15, 2025',
+    endDate: 'Sep 28, 2025',
+    progress: 20,
+    daysLeft: 21,
+    teamMembersCount: 2,
+    teamDetails: [
+      { name: 'James', role: 'Designer' },
+      { name: 'Emily', role: 'Frontend Developer' },
+    ],
+    tasks: [
+      {
+        name: 'Client Requirement Gathering',
+        description: 'Understand the client’s requirements and prepare wireframes accordingly.',
+        startDate: 'July 16, 2025',
+        endDate: 'July 20, 2025',
+        members: ['James'],
+      },
+      {
+        name: 'Prototype Development',
+        description: 'Convert wireframes into an interactive prototype.',
+        startDate: 'July 22, 2025',
+        endDate: 'July 30, 2025',
+        members: ['Emily'],
+      },
+    ],
+  },
 ];
 
 function Dashboard() {
@@ -74,16 +196,17 @@ function Dashboard() {
           </div>
 
           {/* Project Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {projects.map((project, index) => (
-              <ProjectCard key={index} project={project} />
-            ))}
-          </div>
+          <div className="container mx-auto px-4 py-6">
+      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+
+      {/* Render ProjectTabs */}
+      <ProjectTabs projects={projects} />
+    </div>
         </div>
 
         <div className="lg:w-1/3 flex flex-col border p-4 bg-white rounded-3xl overflow-hidden">
           {/* Calendar */}
-          <CalendarComponent />
+          <BasicDateCalendar />
 
           {/* Tasks Section */}
           <div className="mt-6">
